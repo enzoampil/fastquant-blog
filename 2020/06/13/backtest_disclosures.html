@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Title | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Title" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html" />
+<meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-13T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@type":"BlogPosting","headline":"Title","dateModified":"2020-06-13T00:00:00-05:00","datePublished":"2020-06-13T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Title | fastpages</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Title" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html" />
+<meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-13T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@type":"BlogPosting","headline":"Title","dateModified":"2020-06-13T00:00:00-05:00","datePublished":"2020-06-13T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/06/13/backtest_disclosures.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastpages" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastquant-blog/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fastquant-blog/about/">About Me</a><a class="page-link" href="/fastquant-blog/search/">Search</a><a class="page-link" href="/fastquant-blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Title</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-13T00:00:00-05:00" itemprop="datePublished">
+        Jun 13, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      12 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/enzoampil/fastquant-blog/tree/master/_notebooks/2020-06-13-backtest_disclosures.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/fastquant-blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/enzoampil/fastquant-blog/master?filepath=_notebooks%2F2020-06-13-backtest_disclosures.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastquant-blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/enzoampil/fastquant-blog/blob/master/_notebooks/2020-06-13-backtest_disclosures.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastquant-blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-06-13-backtest_disclosures.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://colab.research.google.com/github/enzoampil/fastquant/blob/master/examples/backtest_disclosures.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># uncomment to install in colab</span>
+<span class="c1"># !pip install -e git+https://github.com/enzoampil/fastquant.git@master#egg=fastquant</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Company-disclosures-based-trading-strategy">Company disclosures-based trading strategy<a class="anchor-link" href="#Company-disclosures-based-trading-strategy"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastquant</span> <span class="kn">import</span> <span class="n">DisclosuresPSE</span>
+
+<span class="n">dpse</span> <span class="o">=</span> <span class="n">DisclosuresPSE</span><span class="p">(</span><span class="s2">&quot;JFC&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="o">=</span><span class="s2">&quot;01-01-2015&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Pulling JFC disclosures summary...
+3 pages detected!
+Found 145 disclosures between 01-01-2015 &amp; 07-15-2020 with 16 types:
+[&#39;Material Information/Transactions&#39;
+ &#34;Notice of Annual or Special Stockholders&#39; Meeting&#34; &#39;Press Release&#39;
+ &#34;Notice of Analysts&#39;/Investors&#39; Briefing&#34; &#39;Declaration of Cash Dividends&#39;
+ &#39;Joint Ventures&#39; &#39;Change in Corporate Contact Details and/or Website&#39;
+ &#39;Substantial Acquisitions&#39; &#39;Clarification of News Reports&#39;
+ &#34;Results of Annual or Special Stockholders&#39; Meeting&#34;
+ &#39;Results of Organizational Meeting of Board of Directors&#39;
+ &#39;Acquisition or Disposition of Shares of Another Corporation&#39;
+ &#39;Change in Directors and/or Officers (Resignation, Removal or Appointment, Election and/or Promotion)&#39;
+ &#39;Amendments to By-Laws&#39; &#39;Amendments to Articles of Incorporation&#39;
+ &#39;Update on Corporate Actions/Material Transactions/Agreements&#39;]
+Pulling details in all JFC disclosures...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 1/1 [00:00&lt;00:00,  6.50it/s]
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Loaded: /home/jgendrinal/rprojects/fastquant/examples/src/fastquant/python/fastquant/data/JFC_disclosures_01-01-2015_07-15-2020.csv
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dpse</span><span class="o">.</span><span class="n">disclosures_combined</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Company Name</th>
+      <th>Template Name</th>
+      <th>PSE Form Number</th>
+      <th>Announce Date and Time</th>
+      <th>Circular Number</th>
+      <th>edge_no</th>
+      <th>url</th>
+      <th>disclosure_table</th>
+      <th>Background/Description of the Disclosure</th>
+      <th>Subject of the Disclosure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>[Amend-1]Material Information/Transactions</td>
+      <td>4-30</td>
+      <td>2020-06-25 07:37:00</td>
+      <td>C04444-2020</td>
+      <td>68f4aa3616d6457c0de8473cebbd6407</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "Common", "Subject of ...</td>
+      <td>Jollibee Foods Corporation (JFC, the “Guaranto...</td>
+      <td>JFC to Issue US$ 600 Million 5.5 and 10 Year N...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Material Information/Transactions</td>
+      <td>4-30</td>
+      <td>2020-06-19 08:01:00</td>
+      <td>C04295-2020</td>
+      <td>0be4ceaf09ea28090de8473cebbd6407</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "COMMON", "Subject of ...</td>
+      <td>Golden Plate Pte. Ltd. (GPPL), a wholly owned ...</td>
+      <td>Jollibee Foods Corporation (JFC) and Dim Sum P...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Material Information/Transactions</td>
+      <td>4-30</td>
+      <td>2020-06-17 10:39:00</td>
+      <td>C04227-2020</td>
+      <td>d1a0237ac4559bda0de8473cebbd6407</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "COMMON", "Subject of ...</td>
+      <td>Jollibee Foods Corporation (JFC) announced tha...</td>
+      <td>Cash dividend declaration</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Notice of Annual or Special Stockholders' Meeting</td>
+      <td>7-1</td>
+      <td>2020-05-28 07:23:00</td>
+      <td>C03757-2020</td>
+      <td>3d7278efdfc3720b0de8473cebbd6407</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "COMMON", "Subject of ...</td>
+      <td>In compliance with National Telecommunication ...</td>
+      <td>Update of Corporate Contact Details</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Press Release</td>
+      <td>4-31</td>
+      <td>2020-05-28 07:17:00</td>
+      <td>C03749-2020</td>
+      <td>55ee488e963620db0de8473cebbd6407</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "COMMON", "Subject of ...</td>
+      <td>Further to its May 8, 2018 disclosure, JFC dis...</td>
+      <td>JFC to increase investment in Buyer of Tim Ho ...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>140</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Declaration of Cash Dividends</td>
+      <td>6-1</td>
+      <td>2015-04-08 08:39:00</td>
+      <td>C01729-2015</td>
+      <td>49a8d6ba7f7608fcb15effbf9088d1ab</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "Common", "Subject of ...</td>
+      <td>Jollibee Worldwide Pte. Ltd., (the “Issuer”), ...</td>
+      <td>JFC Mandates Banks for U.S.$ Senior Unsecured ...</td>
+    </tr>
+    <tr>
+      <th>141</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Press Release</td>
+      <td>4-31</td>
+      <td>2015-02-23 13:41:00</td>
+      <td>C00789-2015</td>
+      <td>929338ec12042f71b15effbf9088d1ab</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "COMMON", "Subject of ...</td>
+      <td>Notice of annual stockholders' meeting for the...</td>
+      <td>Notice of annual stockholders' meeting for the...</td>
+    </tr>
+    <tr>
+      <th>142</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Clarification of News Reports</td>
+      <td>4-13</td>
+      <td>2015-01-22 14:28:00</td>
+      <td>C00256-2015</td>
+      <td>7578082745af0a94b15effbf9088d1ab</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "Common", "Subject of ...</td>
+      <td>JFC Announces First Quarter 2020 Financial Res...</td>
+      <td>Press Release: 2020 1st Quarter Financial Results</td>
+    </tr>
+    <tr>
+      <th>143</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Update on Corporate Actions/Material Transacti...</td>
+      <td>16-1</td>
+      <td>2015-01-09 13:24:00</td>
+      <td>C00092-2015</td>
+      <td>09cd76ec59b47b6db15effbf9088d1ab</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "Common", "Subject of ...</td>
+      <td>Jollibee Foods Corporation, one of Asia's larg...</td>
+      <td>JFC to Spend Php7 Billion for Business Transfo...</td>
+    </tr>
+    <tr>
+      <th>144</th>
+      <td>Jollibee Foods Corporation</td>
+      <td>Update on Corporate Actions/Material Transacti...</td>
+      <td>16-1</td>
+      <td>2015-01-06 07:51:00</td>
+      <td>C00024-2015</td>
+      <td>56a1e05383b8fec9b15effbf9088d1ab</td>
+      <td>https://edge.pse.com.ph/openDiscViewer.do?edge...</td>
+      <td>{"Title of Each Class": "common ", "Subject of...</td>
+      <td>Jollibee Foods Corporation will do an Earnings...</td>
+      <td>JFC’s Earnings Call for its First Quarter 2020...</td>
+    </tr>
+  </tbody>
+</table>
+<p>145 rows × 10 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!pip install nltk</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;vader_lexicon&#39;</span><span class="p">)</span>
+
+<span class="n">sia</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[nltk_data] Downloading package vader_lexicon to
+[nltk_data]     /home/jgendrinal/nltk_data...
+[nltk_data]   Package vader_lexicon is already up-to-date!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nltk.download(&#39;punkt&#39;)</span>
+<span class="c1"># nltk.download(&#39;averaged_perceptron_tagger&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">date_sentiments</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="n">dpse</span><span class="o">.</span><span class="n">disclosures_combined</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Announce Date and Time&#39;</span><span class="p">]</span>
+    <span class="n">paragraph</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Background/Description of the Disclosure&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">paragraph</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1">#split paragraph into sentences </span>
+    <span class="c1">#     sentences = nltk.sent_tokenize(paragraph)</span>
+    <span class="c1">#     for sentence in sentences: </span>
+    <span class="c1">#         sentiment = sia.polarity_scores(sentence)[&#39;compound&#39;]</span>
+        <span class="n">sentiment</span> <span class="o">=</span> <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)[</span><span class="s1">&#39;compound&#39;</span><span class="p">]</span>
+        <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="n">sentiment</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">date_sentiments</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{Timestamp(&#39;2020-06-25 07:37:00&#39;): 0.9538,
+ Timestamp(&#39;2020-06-19 08:01:00&#39;): 0.8176,
+ Timestamp(&#39;2020-06-17 10:39:00&#39;): 0.8658,
+ Timestamp(&#39;2020-05-28 07:23:00&#39;): 0.6908,
+ Timestamp(&#39;2020-05-28 07:17:00&#39;): 0.936,
+ Timestamp(&#39;2020-05-22 11:03:00&#39;): 0.7096,
+ Timestamp(&#39;2020-04-15 07:41:00&#39;): 0.9796,
+ Timestamp(&#39;2020-04-07 10:16:00&#39;): 0.8807,
+ Timestamp(&#39;2020-03-20 07:16:00&#39;): 0.8074,
+ Timestamp(&#39;2020-03-16 12:49:00&#39;): 0.4939,
+ Timestamp(&#39;2020-03-13 15:49:00&#39;): 0.0,
+ Timestamp(&#39;2020-02-18 15:26:00&#39;): 0.0,
+ Timestamp(&#39;2020-02-04 09:34:00&#39;): 0.0,
+ Timestamp(&#39;2020-01-24 07:35:00&#39;): 0.0,
+ Timestamp(&#39;2020-01-17 08:17:00&#39;): 0.4019,
+ Timestamp(&#39;2020-01-09 14:03:00&#39;): 0.4767,
+ Timestamp(&#39;2019-11-14 11:38:00&#39;): 0.0,
+ Timestamp(&#39;2019-11-14 08:06:00&#39;): 0.4767,
+ Timestamp(&#39;2019-11-11 14:52:00&#39;): 0.91,
+ Timestamp(&#39;2019-10-07 12:42:00&#39;): 0.0,
+ Timestamp(&#39;2019-10-02 15:46:00&#39;): 0.7351,
+ Timestamp(&#39;2019-09-24 15:43:00&#39;): 0.4767,
+ Timestamp(&#39;2019-09-16 11:10:00&#39;): 0.0,
+ Timestamp(&#39;2019-09-06 15:50:00&#39;): 0.7964,
+ Timestamp(&#39;2019-09-06 15:17:00&#39;): 0.4215,
+ Timestamp(&#39;2019-08-05 15:01:00&#39;): 0.6588,
+ Timestamp(&#39;2019-08-01 09:48:00&#39;): 0.7351,
+ Timestamp(&#39;2019-07-08 07:32:00&#39;): 0.4404,
+ Timestamp(&#39;2019-07-01 13:15:00&#39;): 0.8176,
+ Timestamp(&#39;2019-06-28 15:59:00&#39;): 0.0,
+ Timestamp(&#39;2019-06-28 15:14:00&#39;): 0.0,
+ Timestamp(&#39;2019-06-28 15:11:00&#39;): 0.0,
+ Timestamp(&#39;2019-06-28 07:41:00&#39;): 0.4215,
+ Timestamp(&#39;2019-05-29 11:41:00&#39;): 0.8316,
+ Timestamp(&#39;2019-05-15 14:32:00&#39;): 0.0,
+ Timestamp(&#39;2019-04-22 12:36:00&#39;): 0.0,
+ Timestamp(&#39;2019-04-11 07:58:00&#39;): 0.0,
+ Timestamp(&#39;2019-04-08 14:08:00&#39;): 0.0,
+ Timestamp(&#39;2019-04-08 13:58:00&#39;): 0.0,
+ Timestamp(&#39;2019-02-14 15:00:00&#39;): 0.0,
+ Timestamp(&#39;2019-02-14 14:47:00&#39;): 0.4767,
+ Timestamp(&#39;2018-12-21 13:37:00&#39;): 0.4404,
+ Timestamp(&#39;2018-12-14 10:51:00&#39;): 0.4767,
+ Timestamp(&#39;2018-12-03 08:28:00&#39;): 0.9953,
+ Timestamp(&#39;2018-11-19 11:55:00&#39;): 0.6124,
+ Timestamp(&#39;2018-11-12 13:07:00&#39;): 0.9862,
+ Timestamp(&#39;2018-11-09 14:45:00&#39;): 0.8221,
+ Timestamp(&#39;2018-10-15 13:58:00&#39;): 0.4404,
+ Timestamp(&#39;2018-10-15 13:52:00&#39;): 0.7351,
+ Timestamp(&#39;2018-09-07 08:34:00&#39;): 0.9459,
+ Timestamp(&#39;2018-08-14 07:59:00&#39;): 0.0,
+ Timestamp(&#39;2018-07-05 11:41:00&#39;): 0.4404,
+ Timestamp(&#39;2018-07-05 11:35:00&#39;): 0.8977,
+ Timestamp(&#39;2018-07-02 07:45:00&#39;): 0.4767,
+ Timestamp(&#39;2018-06-29 15:43:00&#39;): 0.6705,
+ Timestamp(&#39;2018-06-29 15:42:00&#39;): 0.8176,
+ Timestamp(&#39;2018-06-29 15:41:00&#39;): 0.4767,
+ Timestamp(&#39;2018-05-09 15:31:00&#39;): 0.0,
+ Timestamp(&#39;2018-05-09 15:11:00&#39;): 0.7783,
+ Timestamp(&#39;2018-04-17 10:01:00&#39;): 0.0,
+ Timestamp(&#39;2018-04-17 08:38:00&#39;): 0.0,
+ Timestamp(&#39;2018-04-11 13:54:00&#39;): 0.4404,
+ Timestamp(&#39;2018-04-06 14:38:00&#39;): 0.9774,
+ Timestamp(&#39;2018-04-05 08:04:00&#39;): 0.0,
+ Timestamp(&#39;2018-03-08 10:23:00&#39;): 0.7351,
+ Timestamp(&#39;2018-02-14 08:14:00&#39;): 0.4767,
+ Timestamp(&#39;2018-02-13 15:18:00&#39;): 0.0,
+ Timestamp(&#39;2018-02-13 14:29:00&#39;): 0.0,
+ Timestamp(&#39;2017-12-26 11:09:00&#39;): 0.9627,
+ Timestamp(&#39;2017-12-05 12:47:00&#39;): 0.0,
+ Timestamp(&#39;2017-11-10 15:00:00&#39;): 0.4404,
+ Timestamp(&#39;2017-11-10 14:36:00&#39;): 0.9747,
+ Timestamp(&#39;2017-11-02 14:02:00&#39;): 0.985,
+ Timestamp(&#39;2017-10-09 13:30:00&#39;): 0.5106,
+ Timestamp(&#39;2017-09-19 12:31:00&#39;): 0.0,
+ Timestamp(&#39;2017-08-14 11:49:00&#39;): 0.9971,
+ Timestamp(&#39;2017-07-05 13:52:00&#39;): 0.4939,
+ Timestamp(&#39;2017-07-03 14:14:00&#39;): 0.0,
+ Timestamp(&#39;2017-06-30 15:21:00&#39;): 0.8176,
+ Timestamp(&#39;2017-05-12 15:49:00&#39;): 0.0,
+ Timestamp(&#39;2017-05-11 15:46:00&#39;): 0.0,
+ Timestamp(&#39;2017-04-06 07:52:00&#39;): 0.0,
+ Timestamp(&#39;2017-04-05 14:56:00&#39;): 0.4939,
+ Timestamp(&#39;2017-04-03 08:37:00&#39;): 0.4939,
+ Timestamp(&#39;2017-03-29 12:04:00&#39;): 0.3182,
+ Timestamp(&#39;2017-03-14 14:45:00&#39;): 0.4767,
+ Timestamp(&#39;2017-02-16 07:39:00&#39;): 0.296,
+ Timestamp(&#39;2017-02-14 14:47:00&#39;): 0.0,
+ Timestamp(&#39;2017-01-03 07:38:00&#39;): 0.836,
+ Timestamp(&#39;2016-12-23 12:56:00&#39;): 0.9882,
+ Timestamp(&#39;2016-12-15 09:16:00&#39;): 0.0,
+ Timestamp(&#39;2016-12-13 08:12:00&#39;): 0.4404,
+ Timestamp(&#39;2016-11-23 12:13:00&#39;): 0.807,
+ Timestamp(&#39;2016-11-21 07:58:00&#39;): 0.807,
+ Timestamp(&#39;2016-11-17 07:44:00&#39;): 0.4019,
+ Timestamp(&#39;2016-11-15 09:19:00&#39;): 0.6705,
+ Timestamp(&#39;2016-11-11 14:49:00&#39;): 0.8176,
+ Timestamp(&#39;2016-08-09 12:22:00&#39;): 0.8016,
+ Timestamp(&#39;2016-07-22 16:04:00&#39;): 0.8478,
+ Timestamp(&#39;2016-07-22 16:03:00&#39;): 0.7003,
+ Timestamp(&#39;2016-05-25 08:28:00&#39;): 0.0,
+ Timestamp(&#39;2016-05-25 08:19:00&#39;): 0.4939,
+ Timestamp(&#39;2016-05-13 12:06:00&#39;): 0.4404,
+ Timestamp(&#39;2016-05-12 14:42:00&#39;): 0.0,
+ Timestamp(&#39;2016-04-22 11:18:00&#39;): 0.0,
+ Timestamp(&#39;2016-04-11 11:49:00&#39;): 0.4767,
+ Timestamp(&#39;2016-04-06 15:20:00&#39;): 0.3182,
+ Timestamp(&#39;2016-02-24 08:34:00&#39;): 0.4404,
+ Timestamp(&#39;2016-02-15 11:53:00&#39;): 0.6124,
+ Timestamp(&#39;2016-02-09 15:24:00&#39;): 0.5423,
+ Timestamp(&#39;2016-01-14 08:26:00&#39;): 0.6597,
+ Timestamp(&#39;2015-11-23 15:27:00&#39;): 0.8176,
+ Timestamp(&#39;2015-11-09 14:43:00&#39;): 0.0,
+ Timestamp(&#39;2015-11-09 14:42:00&#39;): 0.7845,
+ Timestamp(&#39;2015-11-02 10:12:00&#39;): 0.9838,
+ Timestamp(&#39;2015-10-27 08:22:00&#39;): 0.9334,
+ Timestamp(&#39;2015-10-13 08:31:00&#39;): 0.4215,
+ Timestamp(&#39;2015-10-02 13:49:00&#39;): 0.8176,
+ Timestamp(&#39;2015-09-18 09:47:00&#39;): 0.0,
+ Timestamp(&#39;2015-08-26 09:16:00&#39;): 0.9081,
+ Timestamp(&#39;2015-08-07 13:31:00&#39;): 0.3182,
+ Timestamp(&#39;2015-06-29 08:10:00&#39;): 0.9792,
+ Timestamp(&#39;2015-06-26 16:03:00&#39;): 0.9792,
+ Timestamp(&#39;2015-05-14 08:30:00&#39;): 0.802,
+ Timestamp(&#39;2015-05-13 14:57:00&#39;): 0.9538,
+ Timestamp(&#39;2015-04-08 08:41:00&#39;): 0.9538,
+ Timestamp(&#39;2015-04-08 08:39:00&#39;): 0.7184,
+ Timestamp(&#39;2015-02-23 13:41:00&#39;): 0.4767,
+ Timestamp(&#39;2015-01-22 14:28:00&#39;): -0.3182,
+ Timestamp(&#39;2015-01-09 13:24:00&#39;): 0.8625,
+ Timestamp(&#39;2015-01-06 07:51:00&#39;): 0.6124}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                            <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">backtrader</span> <span class="k">as</span> <span class="nn">bt</span>
+<span class="kn">import</span> <span class="nn">backtrader.indicators</span> <span class="k">as</span> <span class="nn">btind</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Sentiment</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">Indicator</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,)</span>
+    <span class="n">plotinfo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">plotymargin</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+        <span class="n">plothlines</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">plotyticks</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+    
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">datetime</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">num2date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="n">prev_sentiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">date_sentiments</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">sentiment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+
+
+<span class="k">class</span> <span class="nc">SentimentStrat</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">Strategy</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;printlog&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doprint</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Logging function for this strategy&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">printlog</span> <span class="ow">or</span> <span class="n">doprint</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span> <span class="n">txt</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Keep a reference to the &quot;close&quot; line in the data[0] dataseries</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">close</span>
+        <span class="c1"># Keep track of pending orders</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buyprice</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buycomm</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sma</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">indicators</span><span class="o">.</span><span class="n">SimpleMovingAverage</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">period</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">datetime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">Sentiment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">notify_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Submitted</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Accepted</span><span class="p">]:</span>
+            <span class="c1"># Buy/Sell order submitted/accepted to/by broker - Nothing to do</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># Check if an order has been completed</span>
+        <span class="c1"># Attention: broker could reject order if not enough cash</span>
+        <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Completed</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">isbuy</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="s1">&#39;BUY EXECUTED, Price: </span><span class="si">%.2f</span><span class="s1">, Cost: </span><span class="si">%.2f</span><span class="s1">, Comm </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+                     <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                     <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">buyprice</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">buycomm</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Sell</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;SELL EXECUTED, Price: </span><span class="si">%.2f</span><span class="s1">, Cost: </span><span class="si">%.2f</span><span class="s1">, Comm </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+                          <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                          <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span><span class="p">))</span>
+                
+            <span class="bp">self</span><span class="o">.</span><span class="n">bar_executed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>     
+            
+        <span class="k">elif</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Canceled</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Margin</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Rejected</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Order Canceled/Margin/Rejected&#39;</span><span class="p">)</span>
+            
+        <span class="c1"># Write down: no pending order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">def</span> <span class="nf">notify_trade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trade</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">trade</span><span class="o">.</span><span class="n">isclosed</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;OPERATION PROFIT, GROSS </span><span class="si">%.2f</span><span class="s1">, NET </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                 <span class="p">(</span><span class="n">trade</span><span class="o">.</span><span class="n">pnl</span><span class="p">,</span> <span class="n">trade</span><span class="o">.</span><span class="n">pnlcomm</span><span class="p">))</span>
+    
+    <span class="c1">### Main Strat ###</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># log closing price of the series from the reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Close, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="n">date</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">num2date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="n">prev_sentiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">date_sentiments</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+        
+        <span class="c1"># Check if an order is pending. if yes, we cannot send a 2nd one</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span><span class="p">)</span>
+        <span class="c1"># If not in the market and previous sentiment not none</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="ow">and</span> <span class="n">prev_sentiment</span><span class="p">:</span>
+            <span class="c1"># buy if current close more than sma AND sentiment increased by &gt;= 0.5</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sma</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">-</span> <span class="n">prev_sentiment</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;BUY CREATE, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buy</span><span class="p">()</span>
+                
+        <span class="c1"># Already in the market and previous sentiment not none</span>
+        <span class="k">elif</span> <span class="n">prev_sentiment</span><span class="p">:</span>
+            <span class="c1"># sell if current close less than sma AND sentiment decreased by &gt;= 0.5</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sma</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">-</span> <span class="n">prev_sentiment</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;SELL CREATE, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sell</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;(MA Period </span><span class="si">%2d</span><span class="s1">) Ending Value </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()),</span> <span class="n">doprint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">cerebro</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">Cerebro</span><span class="p">()</span>
+    
+    <span class="c1"># Strategy</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">addstrategy</span><span class="p">(</span><span class="n">SentimentStrat</span><span class="p">)</span>
+
+    <span class="c1"># Data Feed</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">feeds</span><span class="o">.</span><span class="n">YahooFinanceData</span><span class="p">(</span>
+        <span class="n">dataname</span> <span class="o">=</span> <span class="s1">&#39;JBFCF&#39;</span><span class="p">,</span>
+        <span class="n">fromdate</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">date_sentiments</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+        <span class="n">todate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
+        <span class="n">reverse</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span>
+    
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">adddata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">setcash</span><span class="p">(</span><span class="mf">100000.0</span><span class="p">)</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">addsizer</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">sizers</span><span class="o">.</span><span class="n">FixedSize</span><span class="p">,</span> <span class="n">stake</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">setcommission</span><span class="p">(</span><span class="n">commission</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Portfolio Value: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Final Portfolio Value: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Starting Portfolio Value: 100000.00
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-9-a24ff364b1c0&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">    141</span>     cerebro<span class="ansi-blue-fg">.</span>broker<span class="ansi-blue-fg">.</span>setcommission<span class="ansi-blue-fg">(</span>commission<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">0.001</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    142</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Starting Portfolio Value: %.2f&#39;</span> <span class="ansi-blue-fg">%</span> cerebro<span class="ansi-blue-fg">.</span>broker<span class="ansi-blue-fg">.</span>getvalue<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 143</span><span class="ansi-red-fg">     </span>cerebro<span class="ansi-blue-fg">.</span>run<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    144</span>     print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Final Portfolio Value: %.2f&#39;</span> <span class="ansi-blue-fg">%</span> cerebro<span class="ansi-blue-fg">.</span>broker<span class="ansi-blue-fg">.</span>getvalue<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    145</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/cerebro.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1125</span>             <span class="ansi-red-fg"># let&#39;s skip process &#34;spawning&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">   1126</span>             <span class="ansi-green-fg">for</span> iterstrat <span class="ansi-green-fg">in</span> iterstrats<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1127</span><span class="ansi-red-fg">                 </span>runstrat <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>runstrategies<span class="ansi-blue-fg">(</span>iterstrat<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1128</span>                 self<span class="ansi-blue-fg">.</span>runstrats<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span>runstrat<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1129</span>                 <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>_dooptimize<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/cerebro.py</span> in <span class="ansi-cyan-fg">runstrategies</span><span class="ansi-blue-fg">(self, iterstrat, predata)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1291</span>                     self<span class="ansi-blue-fg">.</span>_runonce_old<span class="ansi-blue-fg">(</span>runstrats<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1292</span>                 <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1293</span><span class="ansi-red-fg">                     </span>self<span class="ansi-blue-fg">.</span>_runonce<span class="ansi-blue-fg">(</span>runstrats<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1294</span>             <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1295</span>                 <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>p<span class="ansi-blue-fg">.</span>oldsync<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/cerebro.py</span> in <span class="ansi-cyan-fg">_runonce</span><span class="ansi-blue-fg">(self, runstrats)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1650</span>         &#39;&#39;&#39;
+<span class="ansi-green-intense-fg ansi-bold">   1651</span>         <span class="ansi-green-fg">for</span> strat <span class="ansi-green-fg">in</span> runstrats<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1652</span><span class="ansi-red-fg">             </span>strat<span class="ansi-blue-fg">.</span>_once<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1653</span>             strat<span class="ansi-blue-fg">.</span>reset<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>  <span class="ansi-red-fg"># strat called next by next - reset lines</span>
+<span class="ansi-green-intense-fg ansi-bold">   1654</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/lineiterator.py</span> in <span class="ansi-cyan-fg">_once</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    295</span> 
+<span class="ansi-green-intense-fg ansi-bold">    296</span>         <span class="ansi-green-fg">for</span> indicator <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>_lineiterators<span class="ansi-blue-fg">[</span>LineIterator<span class="ansi-blue-fg">.</span>IndType<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 297</span><span class="ansi-red-fg">             </span>indicator<span class="ansi-blue-fg">.</span>_once<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    298</span> 
+<span class="ansi-green-intense-fg ansi-bold">    299</span>         <span class="ansi-green-fg">for</span> observer <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>_lineiterators<span class="ansi-blue-fg">[</span>LineIterator<span class="ansi-blue-fg">.</span>ObsType<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/lineiterator.py</span> in <span class="ansi-cyan-fg">_once</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    315</span>         <span class="ansi-red-fg"># indicators are each called with its min period</span>
+<span class="ansi-green-intense-fg ansi-bold">    316</span>         self<span class="ansi-blue-fg">.</span>preonce<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_minperiod <span class="ansi-blue-fg">-</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 317</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>oncestart<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_minperiod <span class="ansi-blue-fg">-</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>_minperiod<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    318</span>         self<span class="ansi-blue-fg">.</span>once<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_minperiod<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>buflen<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    319</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/indicator.py</span> in <span class="ansi-cyan-fg">oncestart_via_nextstart</span><span class="ansi-blue-fg">(self, start, end)</span>
+<span class="ansi-green-intense-fg ansi-bold">    122</span> 
+<span class="ansi-green-intense-fg ansi-bold">    123</span>             self<span class="ansi-blue-fg">.</span>advance<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 124</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>nextstart<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    125</span> 
+<span class="ansi-green-intense-fg ansi-bold">    126</span>     <span class="ansi-green-fg">def</span> once_via_next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> start<span class="ansi-blue-fg">,</span> end<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/lineiterator.py</span> in <span class="ansi-cyan-fg">nextstart</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    345</span> 
+<span class="ansi-green-intense-fg ansi-bold">    346</span>         <span class="ansi-red-fg"># Called once for 1st full calculation - defaults to regular next</span>
+<span class="ansi-green-fg">--&gt; 347</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>next<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    348</span> 
+<span class="ansi-green-intense-fg ansi-bold">    349</span>     <span class="ansi-green-fg">def</span> next<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-9-a24ff364b1c0&gt;</span> in <span class="ansi-cyan-fg">next</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span>         <span class="ansi-green-fg">if</span> date <span class="ansi-green-fg">in</span> date_sentiments<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span>             self<span class="ansi-blue-fg">.</span>sentiment <span class="ansi-blue-fg">=</span> date_sentiments<span class="ansi-blue-fg">[</span>date<span class="ansi-blue-fg">]</span>
+<span class="ansi-green-fg">---&gt; 25</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>lines<span class="ansi-blue-fg">.</span>sentiment<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>sentiment
+<span class="ansi-green-intense-fg ansi-bold">     26</span> 
+<span class="ansi-green-intense-fg ansi-bold">     27</span> 
+
+<span class="ansi-green-fg">~/.local/lib/python3.8/site-packages/backtrader/linebuffer.py</span> in <span class="ansi-cyan-fg">__setitem__</span><span class="ansi-blue-fg">(self, ago, value)</span>
+<span class="ansi-green-intense-fg ansi-bold">    220</span>             value <span class="ansi-blue-fg">(</span>variable<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> value to be set
+<span class="ansi-green-intense-fg ansi-bold">    221</span>         &#39;&#39;&#39;
+<span class="ansi-green-fg">--&gt; 222</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>array<span class="ansi-blue-fg">[</span>self<span class="ansi-blue-fg">.</span>idx <span class="ansi-blue-fg">+</span> ago<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> value
+<span class="ansi-green-intense-fg ansi-bold">    223</span>         <span class="ansi-green-fg">for</span> binding <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>bindings<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    224</span>             binding<span class="ansi-blue-fg">[</span>ago<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> value
+
+<span class="ansi-red-fg">TypeError</span>: must be real number, not LineBuffer</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="rappler-news-sentiment">rappler news sentiment<a class="anchor-link" href="#rappler-news-sentiment"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">nltk.sentiment.vader</span> <span class="kn">import</span> <span class="n">SentimentIntensityAnalyzer</span>
+<span class="c1"># nltk.download(&#39;vader_lexicon&#39;)</span>
+
+<span class="n">sia</span> <span class="o">=</span> <span class="n">SentimentIntensityAnalyzer</span><span class="p">()</span>
+
+<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://rappler.com&quot;</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">base_url</span><span class="o">+</span><span class="s1">&#39;/previous-articles?filterMeta=Jollibee&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<span class="n">posts</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;col-xs-12 col-sm-8&quot;</span><span class="p">})</span>
+
+<span class="n">date_sentiments</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span> <span class="c1">#default up to 50 posts</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span>
+    <span class="c1">#date = post.time.text</span>
+    <span class="n">date_string</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">span</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">date_string</span><span class="p">,</span> <span class="s1">&#39;%b </span><span class="si">%d</span><span class="s1">, %Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">base_url</span><span class="o">+</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">link_page</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">base_url</span><span class="o">+</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">link_page</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">link_soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">link_page</span><span class="p">)</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">link_soup</span><span class="o">.</span><span class="n">findAll</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">)</span>
+    <span class="n">passage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="n">passage</span> <span class="o">+=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">sentiment</span> <span class="o">=</span> <span class="n">sia</span><span class="o">.</span><span class="n">polarity_scores</span><span class="p">(</span><span class="n">passage</span><span class="p">)[</span><span class="s1">&#39;compound&#39;</span><span class="p">]</span>
+    <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span> <span class="o">=</span> <span class="n">sentiment</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">date_sentiments</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="p">(</span><span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span>
+                            <span class="n">unicode_literals</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">pl</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">backtrader</span> <span class="k">as</span> <span class="nn">bt</span>
+<span class="kn">import</span> <span class="nn">backtrader.indicators</span> <span class="k">as</span> <span class="nn">btind</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Sentiment</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">Indicator</span><span class="p">):</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;sentiment&#39;</span><span class="p">,)</span>
+    <span class="n">plotinfo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">plotymargin</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+        <span class="n">plothlines</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">plotyticks</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
+    
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">datetime</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">num2date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="n">prev_sentiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">date_sentiments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">sentiment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+
+
+<span class="k">class</span> <span class="nc">SentimentStrat</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">Strategy</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;printlog&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doprint</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39; Logging function for this strategy&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">printlog</span> <span class="ow">or</span> <span class="n">doprint</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">dt</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span> <span class="n">txt</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Keep a reference to the &quot;close&quot; line in the data[0] dataseries</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">close</span>
+        <span class="c1"># Keep track of pending orders</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buyprice</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">buycomm</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sma</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">indicators</span><span class="o">.</span><span class="n">SimpleMovingAverage</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">datas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">period</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">period</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">datetime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">Sentiment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">notify_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Submitted</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Accepted</span><span class="p">]:</span>
+            <span class="c1"># Buy/Sell order submitted/accepted to/by broker - Nothing to do</span>
+            <span class="k">return</span>
+        
+        <span class="c1"># Check if an order has been completed</span>
+        <span class="c1"># Attention: broker could reject order if not enough cash</span>
+        <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Completed</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">isbuy</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="s1">&#39;BUY EXECUTED, Price: </span><span class="si">%.2f</span><span class="s1">, Cost: </span><span class="si">%.2f</span><span class="s1">, Comm </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                    <span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+                     <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                     <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">buyprice</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">buycomm</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># Sell</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;SELL EXECUTED, Price: </span><span class="si">%.2f</span><span class="s1">, Cost: </span><span class="si">%.2f</span><span class="s1">, Comm </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                         <span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">price</span><span class="p">,</span>
+                          <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                          <span class="n">order</span><span class="o">.</span><span class="n">executed</span><span class="o">.</span><span class="n">comm</span><span class="p">))</span>
+                
+            <span class="bp">self</span><span class="o">.</span><span class="n">bar_executed</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>     
+            
+        <span class="k">elif</span> <span class="n">order</span><span class="o">.</span><span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="n">order</span><span class="o">.</span><span class="n">Canceled</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Margin</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">Rejected</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Order Canceled/Margin/Rejected&#39;</span><span class="p">)</span>
+            
+        <span class="c1"># Write down: no pending order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="k">def</span> <span class="nf">notify_trade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trade</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">trade</span><span class="o">.</span><span class="n">isclosed</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;OPERATION PROFIT, GROSS </span><span class="si">%.2f</span><span class="s1">, NET </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                 <span class="p">(</span><span class="n">trade</span><span class="o">.</span><span class="n">pnl</span><span class="p">,</span> <span class="n">trade</span><span class="o">.</span><span class="n">pnlcomm</span><span class="p">))</span>
+    
+    <span class="c1">### Main Strat ###</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># log closing price of the series from the reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Close, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        
+        <span class="n">date</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">num2date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">date</span><span class="p">()</span>
+        <span class="n">prev_sentiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="ow">in</span> <span class="n">date_sentiments</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">=</span> <span class="n">date_sentiments</span><span class="p">[</span><span class="n">date</span><span class="p">]</span>
+        
+        <span class="c1"># Check if an order is pending. if yes, we cannot send a 2nd one</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span><span class="p">)</span>
+        <span class="c1"># If not in the market and previous sentiment not none</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="ow">and</span> <span class="n">prev_sentiment</span><span class="p">:</span>
+            <span class="c1"># buy if current close more than sma AND sentiment increased by &gt;= 0.5</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sma</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">-</span> <span class="n">prev_sentiment</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;BUY CREATE, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buy</span><span class="p">()</span>
+                
+        <span class="c1"># Already in the market and previous sentiment not none</span>
+        <span class="k">elif</span> <span class="n">prev_sentiment</span><span class="p">:</span>
+            <span class="c1"># sell if current close less than sma AND sentiment decreased by &gt;= 0.5</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">sma</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment</span> <span class="o">-</span> <span class="n">prev_sentiment</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;SELL CREATE, </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataclose</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sell</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;(MA Period </span><span class="si">%2d</span><span class="s1">) Ending Value </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span>
+                 <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">period</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()),</span> <span class="n">doprint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">cerebro</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">Cerebro</span><span class="p">()</span>
+    
+    <span class="c1"># Strategy</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">addstrategy</span><span class="p">(</span><span class="n">SentimentStrat</span><span class="p">)</span>
+
+    <span class="c1"># Data Feed</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">bt</span><span class="o">.</span><span class="n">feeds</span><span class="o">.</span><span class="n">YahooFinanceData</span><span class="p">(</span>
+        <span class="n">dataname</span> <span class="o">=</span> <span class="s1">&#39;JBFCF&#39;</span><span class="p">,</span>
+        <span class="n">fromdate</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">date_sentiments</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+        <span class="n">todate</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span>
+        <span class="n">reverse</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span>
+    
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">adddata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">setcash</span><span class="p">(</span><span class="mf">100000.0</span><span class="p">)</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">addsizer</span><span class="p">(</span><span class="n">bt</span><span class="o">.</span><span class="n">sizers</span><span class="o">.</span><span class="n">FixedSize</span><span class="p">,</span> <span class="n">stake</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">setcommission</span><span class="p">(</span><span class="n">commission</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting Portfolio Value: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Final Portfolio Value: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">cerebro</span><span class="o">.</span><span class="n">broker</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+    
+    <span class="n">cerebro</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/fastquant-blog/2020/06/13/backtest_disclosures.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/fastquant-blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/fastquant-blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
