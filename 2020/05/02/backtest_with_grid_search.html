@@ -3,38 +3,38 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>backtesting with grid search using fastquant | fastpages</title>
+<title>backtesting with grid search using fastquant | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="backtesting with grid search using fastquant" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
-<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta name="description" content="Backtest and optimize your trading strategies with only 3 lines of code!" />
+<meta property="og:description" content="Backtest and optimize your trading strategies with only 3 lines of code!" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html" />
-<meta property="og:site_name" content="fastpages" />
+<meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-02T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@type":"BlogPosting","headline":"backtesting with grid search using fastquant","dateModified":"2020-05-02T00:00:00-05:00","datePublished":"2020-05-02T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html"},"@context":"https://schema.org"}</script>
+{"description":"Backtest and optimize your trading strategies with only 3 lines of code!","@type":"BlogPosting","headline":"backtesting with grid search using fastquant","dateModified":"2020-05-02T00:00:00-05:00","datePublished":"2020-05-02T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>backtesting with grid search using fastquant | fastpages</title>
+<link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>backtesting with grid search using fastquant | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="backtesting with grid search using fastquant" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
-<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta name="description" content="Backtest and optimize your trading strategies with only 3 lines of code!" />
+<meta property="og:description" content="Backtest and optimize your trading strategies with only 3 lines of code!" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html" />
-<meta property="og:site_name" content="fastpages" />
+<meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-02T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@type":"BlogPosting","headline":"backtesting with grid search using fastquant","dateModified":"2020-05-02T00:00:00-05:00","datePublished":"2020-05-02T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html"},"@context":"https://schema.org"}</script>
+{"description":"Backtest and optimize your trading strategies with only 3 lines of code!","@type":"BlogPosting","headline":"backtesting with grid search using fastquant","dateModified":"2020-05-02T00:00:00-05:00","datePublished":"2020-05-02T00:00:00-05:00","url":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/2020/05/02/backtest_with_grid_search.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
-<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastpages" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" />
 
 <script>
 function wrap_img(fn) {
@@ -67,7 +67,7 @@ window.onload = wrap_img;
 </script>
 </head><body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/fastquant-blog/">fastpages</a><nav class="site-nav">
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastquant-blog/">fastquant</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -349,10 +349,10 @@ Optimal metrics: {&#39;rtot&#39;: -0.37480465562458976, &#39;ravg&#39;: -0.00066
 
 
 
-<div id="ffbf17a1-4c00-4c69-9113-836e68e8bce4"></div>
+<div id="17206042-30d2-4a4a-be52-f850a26060bd"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#ffbf17a1-4c00-4c69-9113-836e68e8bce4');
+var element = $('#17206042-30d2-4a4a-be52-f850a26060bd');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -1461,10 +1461,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="e4425841-4a6f-4331-9804-c2f041196146"></div>
+<div id="986a72fa-bfe6-4d19-943f-c0a63d372157"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#e4425841-4a6f-4331-9804-c2f041196146');
+var element = $('#986a72fa-bfe6-4d19-943f-c0a63d372157');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -2451,10 +2451,10 @@ Optimal metrics: {&#39;rtot&#39;: 0.06805130501900258, &#39;ravg&#39;: 0.0001206
 
 
 
-<div id="7fada650-ba96-40db-8f73-33be3e43dc5a"></div>
+<div id="f4e55c30-f1a0-47f1-81f5-8343e9c26a28"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#7fada650-ba96-40db-8f73-33be3e43dc5a');
+var element = $('#f4e55c30-f1a0-47f1-81f5-8343e9c26a28');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -3584,10 +3584,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="3b94a9e8-06c7-48d5-a21b-18a20685771b"></div>
+<div id="3262b1a1-a4d5-4849-8400-30cd097b83ac"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#3b94a9e8-06c7-48d5-a21b-18a20685771b');
+var element = $('#3262b1a1-a4d5-4849-8400-30cd097b83ac');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -4482,7 +4482,7 @@ if (IPython.notebook.kernel != null) {
         </p>
       </div>
       <div class="footer-col">
-        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+        <p>Backtest and optimize your trading strategies with only 3 lines of code!</p>
       </div>
     </div>
 
