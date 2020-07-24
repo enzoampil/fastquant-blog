@@ -1,13 +1,15 @@
 ---
 layout: page
-title: About Me
+title: About fastquant
 permalink: /about/
 ---
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+## Mission:
 
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
+To promote data driven investments by making quantitative analysis in finance accessible to everyone.
 
+## Objectives
 
+1) **Raise awareness, and guide beginners** to get a sufficient foundation by teaching the basics of quant analysis with lessons & tutorials presented via blog posts & online lectures
 
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+2) **Make quant analysis simple and easy** w/ a high level python API that allows for lower level configuration for more advanced users - development of an easy to use python package to facilitate data driven investments
