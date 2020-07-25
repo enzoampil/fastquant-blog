@@ -4,7 +4,7 @@ title: About fastquant
 permalink: /about/
 ---
 
-## Mission:
+## Mission
 
 To promote data driven investments by making quantitative analysis in finance accessible to everyone.
 
