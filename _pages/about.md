@@ -6,7 +6,7 @@ permalink: /about/
 
 ## Mission
 
-To promote data driven investments by making quantitative analysis in finance accessible to everyone.
+To give everyone the ability to make data driven investment decisions.
 
 ## Objectives
 
