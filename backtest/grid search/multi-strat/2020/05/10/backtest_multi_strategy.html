@@ -3,36 +3,36 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>backtesting a grid of multi-strategy parameters | fastquant</title>
+<title>Backtesting a grid of multi-strategy parameters | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="backtesting a grid of multi-strategy parameters" />
+<meta property="og:title" content="Backtesting a grid of multi-strategy parameters" />
 <meta name="author" content="Jerome de Leon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="multi-strategy parameter optimization cannot be easier than this" />
-<meta property="og:description" content="multi-strategy parameter optimization cannot be easier than this" />
+<meta name="description" content="Multi-strategy parameter optimization cannot be easier than this" />
+<meta property="og:description" content="Multi-strategy parameter optimization cannot be easier than this" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
 <meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-10T00:00:00-05:00" />
 <script type="application/ld+json">
-{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"Backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>backtesting a grid of multi-strategy parameters | fastquant</title>
+<title>Backtesting a grid of multi-strategy parameters | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="backtesting a grid of multi-strategy parameters" />
+<meta property="og:title" content="Backtesting a grid of multi-strategy parameters" />
 <meta name="author" content="Jerome de Leon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="multi-strategy parameter optimization cannot be easier than this" />
-<meta property="og:description" content="multi-strategy parameter optimization cannot be easier than this" />
+<meta name="description" content="Multi-strategy parameter optimization cannot be easier than this" />
+<meta property="og:description" content="Multi-strategy parameter optimization cannot be easier than this" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
 <meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-05-10T00:00:00-05:00" />
 <script type="application/ld+json">
-{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"Backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -103,7 +103,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">backtesting a grid of multi-strategy parameters</h1><p class="page-description">multi-strategy parameter optimization cannot be easier than this</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-10T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Backtesting a grid of multi-strategy parameters</h1><p class="page-description">Multi-strategy parameter optimization cannot be easier than this</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-10T00:00:00-05:00" itemprop="datePublished">
         May 10, 2020
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
