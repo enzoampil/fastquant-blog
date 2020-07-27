@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>backtesting a grid of multi-strategy parameters | fastquant</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="backtesting a grid of multi-strategy parameters" />
+<meta name="author" content="Jerome de Leon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="multi-strategy parameter optimization cannot be easier than this" />
+<meta property="og:description" content="multi-strategy parameter optimization cannot be easier than this" />
+<link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
+<meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
+<meta property="og:site_name" content="fastquant" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-10T00:00:00-05:00" />
+<script type="application/ld+json">
+{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>backtesting a grid of multi-strategy parameters | fastquant</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="backtesting a grid of multi-strategy parameters" />
+<meta name="author" content="Jerome de Leon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="multi-strategy parameter optimization cannot be easier than this" />
+<meta property="og:description" content="multi-strategy parameter optimization cannot be easier than this" />
+<link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
+<meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" />
+<meta property="og:site_name" content="fastquant" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-10T00:00:00-05:00" />
+<script type="application/ld+json">
+{"dateModified":"2020-05-10T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"multi-strategy parameter optimization cannot be easier than this","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html","headline":"backtesting a grid of multi-strategy parameters","datePublished":"2020-05-10T00:00:00-05:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastquant-blog/">fastquant</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fastquant-blog/about/">About fastquant</a><a class="page-link" href="/fastquant-blog/search/">Search</a><a class="page-link" href="/fastquant-blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">backtesting a grid of multi-strategy parameters</h1><p class="page-description">multi-strategy parameter optimization cannot be easier than this</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-10T00:00:00-05:00" itemprop="datePublished">
+        May 10, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Jerome de Leon</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      23 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/fastquant-blog/categories/#backtest">backtest</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastquant-blog/categories/#grid search">grid search</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastquant-blog/categories/#multi-strat">multi-strat</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/enzoampil/fastquant-blog/tree/master/_notebooks/2020-05-10-backtest_multi_strategy.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/fastquant-blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/enzoampil/fastquant-blog/master?filepath=_notebooks%2F2020-05-10-backtest_multi_strategy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastquant-blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/enzoampil/fastquant-blog/blob/master/_notebooks/2020-05-10-backtest_multi_strategy.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/fastquant-blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Define-strategies-in-a-dictionary">Define strategies in a dictionary </a></li>
+<li class="toc-entry toc-h2"><a href="#Utilize-auto-grid-search">Utilize auto grid search </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-10-backtest_multi_strategy.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># uncomment to install in colab</span>
+<span class="c1"># !pip3 install fastquant</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Define-strategies-in-a-dictionary">
+<a class="anchor" href="#Define-strategies-in-a-dictionary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Define strategies in a dictionary<a class="anchor-link" href="#Define-strategies-in-a-dictionary"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastquant</span> <span class="kn">import</span> <span class="n">backtest</span><span class="p">,</span> <span class="n">get_stock_data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">get_stock_data</span><span class="p">(</span><span class="s2">"JFC"</span><span class="p">,</span> <span class="s2">"2018-01-01"</span><span class="p">,</span> <span class="s2">"2019-01-01"</span><span class="p">)</span>
+
+<span class="c1"># Utilize single set of parameters</span>
+<span class="n">strats</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s2">"smac"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"fast_period"</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">"slow_period"</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span> 
+    <span class="s2">"rsi"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"rsi_lower"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">"rsi_upper"</span><span class="p">:</span> <span class="mi">70</span><span class="p">}</span>
+<span class="p">}</span> 
+<span class="n">res</span> <span class="o">=</span> <span class="n">backtest</span><span class="p">(</span><span class="s2">"multi"</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">strats</span><span class="o">=</span><span class="n">strats</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1"># (1, 16)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Starting Portfolio Value: 100000.00
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 35
+slow_period : 50
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 30
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 100000.0
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 395
+2018-07-06, Afforded size: 395
+2018-07-06, Final size: 395
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 99145.00, Comm 743.59
+2018-08-01, SELL CREATE, 276.00
+2018-08-02, SELL EXECUTED, Price: 276.00, Cost: 99145.00, Comm 817.65
+2018-08-02, OPERATION PROFIT, GROSS 9875.00, NET 8313.76
+2018-08-29, BUY CREATE, 287.40
+2018-08-29, Cash: 108313.76250000001
+2018-08-29, Price: 287.4
+2018-08-29, Buy prop size: 373
+2018-08-29, Afforded size: 373
+2018-08-29, Final size: 373
+2018-08-30, BUY EXECUTED, Price: 287.40, Cost: 107200.20, Comm 804.00
+2018-10-08, SELL CREATE, 252.40
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 309.5610000000147
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 1
+2018-10-08, Afforded size: 1
+2018-10-08, Final size: 1
+2018-10-09, SELL EXECUTED, Price: 252.40, Cost: 107200.20, Comm 706.09
+2018-10-09, OPERATION PROFIT, GROSS -13055.00, NET -14565.09
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 243.00, Comm 1.82
+2018-11-22, BUY CREATE, 285.00
+2018-11-22, Cash: 93503.84950000003
+2018-11-22, Price: 285.0
+2018-11-22, Buy prop size: 325
+2018-11-22, Afforded size: 325
+2018-11-22, Final size: 325
+2018-11-23, BUY EXECUTED, Price: 285.00, Cost: 92625.00, Comm 694.69
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 92868.00, Comm 740.83
+Final PnL: -1778.67
+Final PnL: -1778.67
+==================================================
+Number of strat runs: 1
+Number of strats per run: 2
+Strat names: ['smac', 'rsi']
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 35, 'smac.slow_period': 50, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', -0.0179468149815959), ('ravg', -7.385520568557983e-05), ('rnorm', -0.018439387134145634), ('rnorm100', -1.8439387134145633)])
+OrderedDict([('sharperatio', None)])
+Time used (seconds): 0.06001472473144531
+Optimal parameters: {'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 35, 'smac.slow_period': 50, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+Optimal metrics: {'rtot': -0.0179468149815959, 'ravg': -7.385520568557983e-05, 'rnorm': -0.018439387134145634, 'rnorm100': -1.8439387134145633, 'sharperatio': None, 'pnl': -1778.67, 'final_value': 98221.32700000002}
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 16)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Utilize-auto-grid-search">
+<a class="anchor" href="#Utilize-auto-grid-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>Utilize auto grid search<a class="anchor-link" href="#Utilize-auto-grid-search"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">strats_opt</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s2">"smac"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"fast_period"</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span> <span class="s2">"slow_period"</span><span class="p">:</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">]},</span> 
+    <span class="s2">"rsi"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"rsi_lower"</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s2">"rsi_upper"</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">]}</span> 
+<span class="p">}</span>
+
+<span class="n">res_opt</span> <span class="o">=</span> <span class="n">backtest</span><span class="p">(</span><span class="s2">"multi"</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">strats</span><span class="o">=</span><span class="n">strats_opt</span><span class="p">)</span>
+<span class="n">res_opt</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1"># (4, 16)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Starting Portfolio Value: 100000.00
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 20
+2018-04-12, BUY CREATE, 300.00
+2018-04-12, Cash: 100000.0
+2018-04-12, Price: 300.0
+2018-04-12, Buy prop size: 330
+2018-04-12, Afforded size: 330
+2018-04-12, Final size: 330
+2018-04-13, BUY EXECUTED, Price: 300.00, Cost: 99000.00, Comm 742.50
+2018-04-13, SELL CREATE, 291.60
+2018-04-16, SELL EXECUTED, Price: 291.60, Cost: 99000.00, Comm 721.71
+2018-04-16, OPERATION PROFIT, GROSS -2772.00, NET -4236.21
+2018-08-03, BUY CREATE, 277.00
+2018-08-03, Cash: 95763.79
+2018-08-03, Price: 277.0
+2018-08-03, Buy prop size: 342
+2018-08-03, Afforded size: 342
+2018-08-03, Final size: 342
+2018-08-06, BUY EXECUTED, Price: 277.00, Cost: 94734.00, Comm 710.50
+2018-09-19, SELL CREATE, 271.00
+2018-09-20, SELL EXECUTED, Price: 271.00, Cost: 94734.00, Comm 695.12
+2018-09-20, OPERATION PROFIT, GROSS -2052.00, NET -3457.62
+2018-10-30, BUY CREATE, 264.00
+2018-10-30, Cash: 92306.16999999998
+2018-10-30, Price: 264.0
+2018-10-30, Buy prop size: 346
+2018-10-30, Afforded size: 346
+2018-10-30, Final size: 346
+2018-10-31, BUY EXECUTED, Price: 264.00, Cost: 91344.00, Comm 685.08
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 91344.00, Comm 786.28
+Final PnL: 4328.8
+Final PnL: 4328.8
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 20
+2018-04-12, BUY CREATE, 300.00
+2018-04-12, Cash: 100000.0
+2018-04-12, Price: 300.0
+2018-04-12, Buy prop size: 330
+2018-04-12, Afforded size: 330
+2018-04-12, Final size: 330
+2018-04-13, BUY EXECUTED, Price: 300.00, Cost: 99000.00, Comm 742.50
+2018-04-13, SELL CREATE, 291.60
+2018-04-16, SELL EXECUTED, Price: 291.60, Cost: 99000.00, Comm 721.71
+2018-04-16, OPERATION PROFIT, GROSS -2772.00, NET -4236.21
+2018-08-03, BUY CREATE, 277.00
+2018-08-03, Cash: 95763.79
+2018-08-03, Price: 277.0
+2018-08-03, Buy prop size: 342
+2018-08-03, Afforded size: 342
+2018-08-03, Final size: 342
+2018-08-06, BUY EXECUTED, Price: 277.00, Cost: 94734.00, Comm 710.50
+2018-09-19, SELL CREATE, 271.00
+2018-09-20, SELL EXECUTED, Price: 271.00, Cost: 94734.00, Comm 695.12
+2018-09-20, OPERATION PROFIT, GROSS -2052.00, NET -3457.62
+2018-10-30, BUY CREATE, 264.00
+2018-10-30, Cash: 92306.16999999998
+2018-10-30, Price: 264.0
+2018-10-30, Buy prop size: 346
+2018-10-30, Afforded size: 346
+2018-10-30, Final size: 346
+2018-10-31, BUY EXECUTED, Price: 264.00, Cost: 91344.00, Comm 685.08
+Final PnL: 1239.89
+Final PnL: 1239.89
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 30
+2018-04-12, BUY CREATE, 300.00
+2018-04-12, Cash: 100000.0
+2018-04-12, Price: 300.0
+2018-04-12, Buy prop size: 330
+2018-04-12, Afforded size: 330
+2018-04-12, Final size: 330
+2018-04-13, BUY EXECUTED, Price: 300.00, Cost: 99000.00, Comm 742.50
+2018-04-13, SELL CREATE, 291.60
+2018-04-16, SELL EXECUTED, Price: 291.60, Cost: 99000.00, Comm 721.71
+2018-04-16, OPERATION PROFIT, GROSS -2772.00, NET -4236.21
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 95763.79
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 378
+2018-07-06, Afforded size: 378
+2018-07-06, Final size: 378
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 94878.00, Comm 711.59
+2018-08-01, SELL CREATE, 276.00
+2018-08-02, SELL EXECUTED, Price: 276.00, Cost: 94878.00, Comm 782.46
+2018-08-02, OPERATION PROFIT, GROSS 9450.00, NET 7955.95
+2018-08-03, BUY CREATE, 277.00
+2018-08-03, Cash: 103719.74499999998
+2018-08-03, Price: 277.0
+2018-08-03, Buy prop size: 371
+2018-08-03, Afforded size: 371
+2018-08-03, Final size: 371
+2018-08-06, BUY EXECUTED, Price: 277.00, Cost: 102767.00, Comm 770.75
+2018-09-19, SELL CREATE, 271.00
+2018-09-20, SELL EXECUTED, Price: 271.00, Cost: 102767.00, Comm 754.06
+2018-09-20, OPERATION PROFIT, GROSS -2226.00, NET -3750.81
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 99968.93499999998
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 407
+2018-10-08, Afforded size: 407
+2018-10-08, Final size: 407
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 98901.00, Comm 741.76
+2018-10-30, BUY CREATE, 264.00
+2018-10-30, Cash: 326.1774999999832
+2018-10-30, Price: 264.0
+2018-10-30, Buy prop size: 1
+2018-10-30, Afforded size: 1
+2018-10-30, Final size: 1
+2018-10-31, BUY EXECUTED, Price: 264.00, Cost: 264.00, Comm 1.98
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 99165.00, Comm 927.18
+Final PnL: 22757.02
+Final PnL: 22757.02
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 30
+2018-04-12, BUY CREATE, 300.00
+2018-04-12, Cash: 100000.0
+2018-04-12, Price: 300.0
+2018-04-12, Buy prop size: 330
+2018-04-12, Afforded size: 330
+2018-04-12, Final size: 330
+2018-04-13, BUY EXECUTED, Price: 300.00, Cost: 99000.00, Comm 742.50
+2018-04-13, SELL CREATE, 291.60
+2018-04-16, SELL EXECUTED, Price: 291.60, Cost: 99000.00, Comm 721.71
+2018-04-16, OPERATION PROFIT, GROSS -2772.00, NET -4236.21
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 95763.79
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 378
+2018-07-06, Afforded size: 378
+2018-07-06, Final size: 378
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 94878.00, Comm 711.59
+2018-09-19, SELL CREATE, 271.00
+2018-09-20, SELL EXECUTED, Price: 271.00, Cost: 94878.00, Comm 768.28
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 101843.91999999998
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 415
+2018-10-08, Afforded size: 415
+2018-10-08, Final size: 415
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 100845.00, Comm 756.34
+Final PnL: 21339.58
+Final PnL: 21339.58
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 20
+2018-04-23, BUY CREATE, 294.00
+2018-04-23, Cash: 100000.0
+2018-04-23, Price: 294.0
+2018-04-23, Buy prop size: 337
+2018-04-23, Afforded size: 337
+2018-04-23, Final size: 337
+2018-04-24, BUY EXECUTED, Price: 294.00, Cost: 99078.00, Comm 743.08
+2018-04-26, SELL CREATE, 282.00
+2018-04-27, SELL EXECUTED, Price: 282.00, Cost: 99078.00, Comm 712.75
+2018-04-27, OPERATION PROFIT, GROSS -4044.00, NET -5499.84
+2018-08-08, BUY CREATE, 276.80
+2018-08-08, Cash: 94500.15999999999
+2018-08-08, Price: 276.8
+2018-08-08, Buy prop size: 338
+2018-08-08, Afforded size: 338
+2018-08-08, Final size: 338
+2018-08-09, BUY EXECUTED, Price: 276.80, Cost: 93558.40, Comm 701.69
+2018-09-28, SELL CREATE, 252.00
+2018-10-01, SELL EXECUTED, Price: 252.00, Cost: 93558.40, Comm 638.82
+2018-10-01, OPERATION PROFIT, GROSS -8382.40, NET -9722.91
+2018-11-06, BUY CREATE, 278.60
+2018-11-06, Cash: 84777.25199999998
+2018-11-06, Price: 278.6
+2018-11-06, Buy prop size: 301
+2018-11-06, Afforded size: 301
+2018-11-06, Final size: 301
+2018-11-07, BUY EXECUTED, Price: 278.60, Cost: 83858.60, Comm 628.94
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 83858.60, Comm 684.02
+Final PnL: -9191.31
+Final PnL: -9191.31
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 20
+2018-04-23, BUY CREATE, 294.00
+2018-04-23, Cash: 100000.0
+2018-04-23, Price: 294.0
+2018-04-23, Buy prop size: 337
+2018-04-23, Afforded size: 337
+2018-04-23, Final size: 337
+2018-04-24, BUY EXECUTED, Price: 294.00, Cost: 99078.00, Comm 743.08
+2018-04-26, SELL CREATE, 282.00
+2018-04-27, SELL EXECUTED, Price: 282.00, Cost: 99078.00, Comm 712.75
+2018-04-27, OPERATION PROFIT, GROSS -4044.00, NET -5499.84
+2018-08-08, BUY CREATE, 276.80
+2018-08-08, Cash: 94500.15999999999
+2018-08-08, Price: 276.8
+2018-08-08, Buy prop size: 338
+2018-08-08, Afforded size: 338
+2018-08-08, Final size: 338
+2018-08-09, BUY EXECUTED, Price: 276.80, Cost: 93558.40, Comm 701.69
+2018-09-28, SELL CREATE, 252.00
+2018-10-01, SELL EXECUTED, Price: 252.00, Cost: 93558.40, Comm 638.82
+2018-10-01, OPERATION PROFIT, GROSS -8382.40, NET -9722.91
+2018-11-06, BUY CREATE, 278.60
+2018-11-06, Cash: 84777.25199999998
+2018-11-06, Price: 278.6
+2018-11-06, Buy prop size: 301
+2018-11-06, Afforded size: 301
+2018-11-06, Final size: 301
+2018-11-07, BUY EXECUTED, Price: 278.60, Cost: 83858.60, Comm 628.94
+Final PnL: -11878.49
+Final PnL: -11878.49
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 30
+2018-04-23, BUY CREATE, 294.00
+2018-04-23, Cash: 100000.0
+2018-04-23, Price: 294.0
+2018-04-23, Buy prop size: 337
+2018-04-23, Afforded size: 337
+2018-04-23, Final size: 337
+2018-04-24, BUY EXECUTED, Price: 294.00, Cost: 99078.00, Comm 743.08
+2018-04-26, SELL CREATE, 282.00
+2018-04-27, SELL EXECUTED, Price: 282.00, Cost: 99078.00, Comm 712.75
+2018-04-27, OPERATION PROFIT, GROSS -4044.00, NET -5499.84
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 94500.15999999999
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 373
+2018-07-06, Afforded size: 373
+2018-07-06, Final size: 373
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 93623.00, Comm 702.17
+2018-08-01, SELL CREATE, 276.00
+2018-08-02, SELL EXECUTED, Price: 276.00, Cost: 93623.00, Comm 772.11
+2018-08-02, OPERATION PROFIT, GROSS 9325.00, NET 7850.72
+2018-08-08, BUY CREATE, 276.80
+2018-08-08, Cash: 102350.87749999999
+2018-08-08, Price: 276.8
+2018-08-08, Buy prop size: 366
+2018-08-08, Afforded size: 366
+2018-08-08, Final size: 366
+2018-08-09, BUY EXECUTED, Price: 276.80, Cost: 101308.80, Comm 759.82
+2018-09-28, SELL CREATE, 252.00
+2018-10-01, SELL EXECUTED, Price: 252.00, Cost: 101308.80, Comm 691.74
+2018-10-01, OPERATION PROFIT, GROSS -9076.80, NET -10528.36
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 91822.52149999997
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 374
+2018-10-08, Afforded size: 374
+2018-10-08, Final size: 374
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 90882.00, Comm 681.61
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 90882.00, Comm 849.91
+2018-12-20, OPERATION PROFIT, GROSS 22440.00, NET 20908.47
+Final PnL: 12730.99
+Final PnL: 12730.99
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 10
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 30
+2018-04-23, BUY CREATE, 294.00
+2018-04-23, Cash: 100000.0
+2018-04-23, Price: 294.0
+2018-04-23, Buy prop size: 337
+2018-04-23, Afforded size: 337
+2018-04-23, Final size: 337
+2018-04-24, BUY EXECUTED, Price: 294.00, Cost: 99078.00, Comm 743.08
+2018-04-26, SELL CREATE, 282.00
+2018-04-27, SELL EXECUTED, Price: 282.00, Cost: 99078.00, Comm 712.75
+2018-04-27, OPERATION PROFIT, GROSS -4044.00, NET -5499.84
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 94500.15999999999
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 373
+2018-07-06, Afforded size: 373
+2018-07-06, Final size: 373
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 93623.00, Comm 702.17
+2018-09-28, SELL CREATE, 252.00
+2018-10-01, SELL EXECUTED, Price: 252.00, Cost: 93623.00, Comm 704.97
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 93466.01749999999
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 381
+2018-10-08, Afforded size: 381
+2018-10-08, Final size: 381
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 92583.00, Comm 694.37
+Final PnL: 11364.44
+Final PnL: 11364.44
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 20
+2018-08-07, BUY CREATE, 270.00
+2018-08-07, Cash: 100000.0
+2018-08-07, Price: 270.0
+2018-08-07, Buy prop size: 367
+2018-08-07, Afforded size: 367
+2018-08-07, Final size: 367
+2018-08-08, BUY EXECUTED, Price: 270.00, Cost: 99090.00, Comm 743.17
+2018-09-21, SELL CREATE, 271.00
+2018-09-24, SELL EXECUTED, Price: 271.00, Cost: 99090.00, Comm 745.93
+2018-09-24, OPERATION PROFIT, GROSS 367.00, NET -1122.10
+2018-11-05, BUY CREATE, 280.00
+2018-11-05, Cash: 98877.89749999999
+2018-11-05, Price: 280.0
+2018-11-05, Buy prop size: 350
+2018-11-05, Afforded size: 350
+2018-11-05, Final size: 350
+2018-11-06, BUY EXECUTED, Price: 280.00, Cost: 98000.00, Comm 735.00
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 98000.00, Comm 795.38
+Final PnL: 5397.52
+Final PnL: 5397.52
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 20
+2018-08-07, BUY CREATE, 270.00
+2018-08-07, Cash: 100000.0
+2018-08-07, Price: 270.0
+2018-08-07, Buy prop size: 367
+2018-08-07, Afforded size: 367
+2018-08-07, Final size: 367
+2018-08-08, BUY EXECUTED, Price: 270.00, Cost: 99090.00, Comm 743.17
+2018-09-21, SELL CREATE, 271.00
+2018-09-24, SELL EXECUTED, Price: 271.00, Cost: 99090.00, Comm 745.93
+2018-09-24, OPERATION PROFIT, GROSS 367.00, NET -1122.10
+2018-11-05, BUY CREATE, 280.00
+2018-11-05, Cash: 98877.89749999999
+2018-11-05, Price: 280.0
+2018-11-05, Buy prop size: 350
+2018-11-05, Afforded size: 350
+2018-11-05, Final size: 350
+2018-11-06, BUY EXECUTED, Price: 280.00, Cost: 98000.00, Comm 735.00
+Final PnL: 2272.9
+Final PnL: 2272.9
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 30
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 100000.0
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 395
+2018-07-06, Afforded size: 395
+2018-07-06, Final size: 395
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 99145.00, Comm 743.59
+2018-08-01, SELL CREATE, 276.00
+2018-08-02, SELL EXECUTED, Price: 276.00, Cost: 99145.00, Comm 817.65
+2018-08-02, OPERATION PROFIT, GROSS 9875.00, NET 8313.76
+2018-08-07, BUY CREATE, 270.00
+2018-08-07, Cash: 108313.76250000001
+2018-08-07, Price: 270.0
+2018-08-07, Buy prop size: 397
+2018-08-07, Afforded size: 397
+2018-08-07, Final size: 397
+2018-08-08, BUY EXECUTED, Price: 270.00, Cost: 107190.00, Comm 803.92
+2018-09-21, SELL CREATE, 271.00
+2018-09-24, SELL EXECUTED, Price: 271.00, Cost: 107190.00, Comm 806.90
+2018-09-24, OPERATION PROFIT, GROSS 397.00, NET -1213.83
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 107099.93500000001
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 437
+2018-10-08, Afforded size: 437
+2018-10-08, Final size: 437
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 106191.00, Comm 796.43
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 106191.00, Comm 993.08
+2018-12-20, OPERATION PROFIT, GROSS 26220.00, NET 24430.49
+Final PnL: 31530.42
+Final PnL: 31530.42
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 40
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 30
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 100000.0
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 395
+2018-07-06, Afforded size: 395
+2018-07-06, Final size: 395
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 99145.00, Comm 743.59
+2018-09-21, SELL CREATE, 271.00
+2018-09-24, SELL EXECUTED, Price: 271.00, Cost: 99145.00, Comm 802.84
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 106353.57500000001
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 433
+2018-10-08, Afforded size: 433
+2018-10-08, Final size: 433
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 105219.00, Comm 789.14
+2018-11-05, BUY CREATE, 280.00
+2018-11-05, Cash: 345.4325000000116
+2018-11-05, Price: 280.0
+2018-11-05, Buy prop size: 1
+2018-11-05, Afforded size: 1
+2018-11-05, Final size: 1
+2018-11-06, BUY EXECUTED, Price: 280.00, Cost: 280.00, Comm 2.10
+Final PnL: 26704.53
+Final PnL: 26704.53
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 20
+2018-08-14, BUY CREATE, 273.40
+2018-08-14, Cash: 100000.0
+2018-08-14, Price: 273.4
+2018-08-14, Buy prop size: 362
+2018-08-14, Afforded size: 362
+2018-08-14, Final size: 362
+2018-08-15, BUY EXECUTED, Price: 273.40, Cost: 98970.80, Comm 742.28
+2018-10-01, SELL CREATE, 250.00
+2018-10-02, SELL EXECUTED, Price: 250.00, Cost: 98970.80, Comm 678.75
+2018-10-02, OPERATION PROFIT, GROSS -8470.80, NET -9891.83
+2018-11-08, BUY CREATE, 280.00
+2018-11-08, Cash: 90108.16900000001
+2018-11-08, Price: 280.0
+2018-11-08, Buy prop size: 319
+2018-11-08, Afforded size: 319
+2018-11-08, Final size: 319
+2018-11-09, BUY EXECUTED, Price: 280.00, Cost: 89320.00, Comm 669.90
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 89320.00, Comm 724.93
+Final PnL: -3949.66
+Final PnL: -3949.66
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 20
+2018-08-14, BUY CREATE, 273.40
+2018-08-14, Cash: 100000.0
+2018-08-14, Price: 273.4
+2018-08-14, Buy prop size: 362
+2018-08-14, Afforded size: 362
+2018-08-14, Final size: 362
+2018-08-15, BUY EXECUTED, Price: 273.40, Cost: 98970.80, Comm 742.28
+2018-10-01, SELL CREATE, 250.00
+2018-10-02, SELL EXECUTED, Price: 250.00, Cost: 98970.80, Comm 678.75
+2018-10-02, OPERATION PROFIT, GROSS -8470.80, NET -9891.83
+2018-11-08, BUY CREATE, 280.00
+2018-11-08, Cash: 90108.16900000001
+2018-11-08, Price: 280.0
+2018-11-08, Buy prop size: 319
+2018-11-08, Afforded size: 319
+2018-11-08, Final size: 319
+2018-11-09, BUY EXECUTED, Price: 280.00, Cost: 89320.00, Comm 669.90
+Final PnL: -6797.53
+Final PnL: -6797.53
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 70
+rsi_lower : 30
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 100000.0
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 395
+2018-07-06, Afforded size: 395
+2018-07-06, Final size: 395
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 99145.00, Comm 743.59
+2018-08-01, SELL CREATE, 276.00
+2018-08-02, SELL EXECUTED, Price: 276.00, Cost: 99145.00, Comm 817.65
+2018-08-02, OPERATION PROFIT, GROSS 9875.00, NET 8313.76
+2018-08-14, BUY CREATE, 273.40
+2018-08-14, Cash: 108313.76250000001
+2018-08-14, Price: 273.4
+2018-08-14, Buy prop size: 392
+2018-08-14, Afforded size: 392
+2018-08-14, Final size: 392
+2018-08-15, BUY EXECUTED, Price: 273.40, Cost: 107172.80, Comm 803.80
+2018-10-01, SELL CREATE, 250.00
+2018-10-02, SELL EXECUTED, Price: 250.00, Cost: 107172.80, Comm 735.00
+2018-10-02, OPERATION PROFIT, GROSS -9172.80, NET -10711.60
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 97602.16650000002
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 398
+2018-10-08, Afforded size: 398
+2018-10-08, Final size: 398
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 96714.00, Comm 725.36
+2018-12-19, SELL CREATE, 303.00
+2018-12-20, SELL EXECUTED, Price: 303.00, Cost: 96714.00, Comm 904.45
+2018-12-20, OPERATION PROFIT, GROSS 23880.00, NET 22250.19
+Final PnL: 19852.36
+Final PnL: 19852.36
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+fast_period : 15
+slow_period : 60
+===Global level arguments===
+init_cash : 100000
+buy_prop : 1
+sell_prop : 1
+===Strategy level arguments===
+rsi_period : 14
+rsi_upper : 80
+rsi_lower : 30
+2018-07-06, BUY CREATE, 251.00
+2018-07-06, Cash: 100000.0
+2018-07-06, Price: 251.0
+2018-07-06, Buy prop size: 395
+2018-07-06, Afforded size: 395
+2018-07-06, Final size: 395
+2018-07-09, BUY EXECUTED, Price: 251.00, Cost: 99145.00, Comm 743.59
+2018-10-01, SELL CREATE, 250.00
+2018-10-02, SELL EXECUTED, Price: 250.00, Cost: 99145.00, Comm 740.62
+2018-10-08, BUY CREATE, 243.00
+2018-10-08, Cash: 98120.7875
+2018-10-08, Price: 243.0
+2018-10-08, Buy prop size: 400
+2018-10-08, Afforded size: 400
+2018-10-08, Final size: 400
+2018-10-09, BUY EXECUTED, Price: 243.00, Cost: 97200.00, Comm 729.00
+Final PnL: 16911.79
+Final PnL: 16911.79
+==================================================
+Number of strat runs: 16
+Number of strats per run: 2
+Strat names: ['smac', 'rsi']
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', 0.042377312386123134), ('ravg', 0.000174392232041659), ('rnorm', 0.04492680768865365), ('rnorm100', 4.492680768865364)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', 0.012322663161177035), ('ravg', 5.071054798838286e-05), ('rnorm', 0.012861059182548444), ('rnorm100', 1.2861059182548444)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.2050367480952209), ('ravg', 0.0008437726259062589), ('rnorm', 0.23692777159818812), ('rnorm100', 23.69277715981881)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.19342289577512692), ('ravg', 0.00079597899495937), ('rnorm', 0.2221195736378016), ('rnorm100', 22.21195736378016)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', -0.0964152001144457), ('ravg', -0.0003967703708413403), ('rnorm', -0.0951500349055751), ('rnorm100', -9.51500349055751)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', -0.12645350010683382), ('ravg', -0.0005203847741021968), ('rnorm', -0.12290236382425088), ('rnorm100', -12.290236382425087)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.11983418838139474), ('ravg', 0.0004931448081538878), ('rnorm', 0.13232437790797075), ('rnorm100', 13.232437790797075)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 10, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.10763792539049269), ('ravg', 0.00044295442547527856), ('rnorm', 0.11809295492841805), ('rnorm100', 11.809295492841805)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', 0.052568944150307696), ('ravg', 0.00021633310349920864), ('rnorm', 0.05602931158519976), ('rnorm100', 5.602931158519977)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', 0.022474520295117782), ('ravg', 9.248773783999087e-05), ('rnorm', 0.02358063841261683), ('rnorm100', 2.358063841261683)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.2740679696753637), ('ravg', 0.0011278517270591098), ('rnorm', 0.3287234047301618), ('rnorm100', 32.87234047301618)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.23668767417980946), ('ravg', 0.0009740233505341953), ('rnorm', 0.2782013371264516), ('rnorm100', 27.820133712645163)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', -0.04029774133997106), ('ravg', -0.00016583432650193853), ('rnorm', -0.04092907566388783), ('rnorm100', -4.092907566388783)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 20}
+OrderedDict([('rtot', -0.07039597323112812), ('ravg', -0.00028969536309106223), ('rnorm', -0.07040217397345756), ('rnorm100', -7.0402173973457565)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.18109043677660316), ('ravg', 0.0007452281348831406), ('rnorm', 0.20658914422764327), ('rnorm100', 20.658914422764326)])
+OrderedDict([('sharperatio', None)])
+**************************************************
+--------------------------------------------------
+{'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 60, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 80, 'rsi.rsi_lower': 30}
+OrderedDict([('rtot', 0.15624951145271396), ('ravg', 0.0006430021047436788), ('rnorm', 0.1759031967451431), ('rnorm100', 17.59031967451431)])
+OrderedDict([('sharperatio', None)])
+Time used (seconds): 0.9437069892883301
+Optimal parameters: {'init_cash': 100000, 'buy_prop': 1, 'sell_prop': 1, 'execution_type': 'close', 'smac.fast_period': 15, 'smac.slow_period': 40, 'rsi.rsi_period': 14, 'rsi.rsi_upper': 70, 'rsi.rsi_lower': 30}
+Optimal metrics: {'rtot': 0.2740679696753637, 'ravg': 0.0011278517270591098, 'rnorm': 0.3287234047301618, 'rnorm100': 32.87234047301618, 'sharperatio': None, 'pnl': 31530.42, 'final_value': 131530.42}
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(16, 16)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">res_opt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>init_cash</th>
+      <th>buy_prop</th>
+      <th>sell_prop</th>
+      <th>execution_type</th>
+      <th>smac.fast_period</th>
+      <th>smac.slow_period</th>
+      <th>rsi.rsi_period</th>
+      <th>rsi.rsi_upper</th>
+      <th>rsi.rsi_lower</th>
+      <th>rtot</th>
+      <th>ravg</th>
+      <th>rnorm</th>
+      <th>rnorm100</th>
+      <th>sharperatio</th>
+      <th>pnl</th>
+      <th>final_value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>40</td>
+      <td>14</td>
+      <td>70</td>
+      <td>30</td>
+      <td>0.274068</td>
+      <td>0.001128</td>
+      <td>0.328723</td>
+      <td>32.872340</td>
+      <td>None</td>
+      <td>31530.42</td>
+      <td>131530.4200</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>40</td>
+      <td>14</td>
+      <td>80</td>
+      <td>30</td>
+      <td>0.236688</td>
+      <td>0.000974</td>
+      <td>0.278201</td>
+      <td>27.820134</td>
+      <td>None</td>
+      <td>26704.53</td>
+      <td>126704.5325</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>40</td>
+      <td>14</td>
+      <td>70</td>
+      <td>30</td>
+      <td>0.205037</td>
+      <td>0.000844</td>
+      <td>0.236928</td>
+      <td>23.692777</td>
+      <td>None</td>
+      <td>22757.02</td>
+      <td>122757.0175</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>40</td>
+      <td>14</td>
+      <td>80</td>
+      <td>30</td>
+      <td>0.193423</td>
+      <td>0.000796</td>
+      <td>0.222120</td>
+      <td>22.211957</td>
+      <td>None</td>
+      <td>21339.58</td>
+      <td>121339.5825</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>60</td>
+      <td>14</td>
+      <td>70</td>
+      <td>30</td>
+      <td>0.181090</td>
+      <td>0.000745</td>
+      <td>0.206589</td>
+      <td>20.658914</td>
+      <td>None</td>
+      <td>19852.36</td>
+      <td>119852.3565</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>60</td>
+      <td>14</td>
+      <td>80</td>
+      <td>30</td>
+      <td>0.156250</td>
+      <td>0.000643</td>
+      <td>0.175903</td>
+      <td>17.590320</td>
+      <td>None</td>
+      <td>16911.79</td>
+      <td>116911.7875</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>60</td>
+      <td>14</td>
+      <td>70</td>
+      <td>30</td>
+      <td>0.119834</td>
+      <td>0.000493</td>
+      <td>0.132324</td>
+      <td>13.232438</td>
+      <td>None</td>
+      <td>12730.99</td>
+      <td>112730.9915</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>60</td>
+      <td>14</td>
+      <td>80</td>
+      <td>30</td>
+      <td>0.107638</td>
+      <td>0.000443</td>
+      <td>0.118093</td>
+      <td>11.809295</td>
+      <td>None</td>
+      <td>11364.44</td>
+      <td>111364.4450</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>40</td>
+      <td>14</td>
+      <td>70</td>
+      <td>20</td>
+      <td>0.052569</td>
+      <td>0.000216</td>
+      <td>0.056029</td>
+      <td>5.602931</td>
+      <td>None</td>
+      <td>5397.52</td>
+      <td>105397.5225</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>40</td>
+      <td>14</td>
+      <td>70</td>
+      <td>20</td>
+      <td>0.042377</td>
+      <td>0.000174</td>
+      <td>0.044927</td>
+      <td>4.492681</td>
+      <td>None</td>
+      <td>4328.80</td>
+      <td>104328.8050</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>40</td>
+      <td>14</td>
+      <td>80</td>
+      <td>20</td>
+      <td>0.022475</td>
+      <td>0.000092</td>
+      <td>0.023581</td>
+      <td>2.358064</td>
+      <td>None</td>
+      <td>2272.90</td>
+      <td>102272.8975</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>40</td>
+      <td>14</td>
+      <td>80</td>
+      <td>20</td>
+      <td>0.012323</td>
+      <td>0.000051</td>
+      <td>0.012861</td>
+      <td>1.286106</td>
+      <td>None</td>
+      <td>1239.89</td>
+      <td>101239.8900</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>60</td>
+      <td>14</td>
+      <td>70</td>
+      <td>20</td>
+      <td>-0.040298</td>
+      <td>-0.000166</td>
+      <td>-0.040929</td>
+      <td>-4.092908</td>
+      <td>None</td>
+      <td>-3949.66</td>
+      <td>96050.3415</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>15</td>
+      <td>60</td>
+      <td>14</td>
+      <td>80</td>
+      <td>20</td>
+      <td>-0.070396</td>
+      <td>-0.000290</td>
+      <td>-0.070402</td>
+      <td>-7.040217</td>
+      <td>None</td>
+      <td>-6797.53</td>
+      <td>93202.4690</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>60</td>
+      <td>14</td>
+      <td>70</td>
+      <td>20</td>
+      <td>-0.096415</td>
+      <td>-0.000397</td>
+      <td>-0.095150</td>
+      <td>-9.515003</td>
+      <td>None</td>
+      <td>-9191.31</td>
+      <td>90808.6900</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>100000</td>
+      <td>1</td>
+      <td>1</td>
+      <td>close</td>
+      <td>10</td>
+      <td>60</td>
+      <td>14</td>
+      <td>80</td>
+      <td>20</td>
+      <td>-0.126454</td>
+      <td>-0.000520</td>
+      <td>-0.122902</td>
+      <td>-12.290236</td>
+      <td>None</td>
+      <td>-11878.49</td>
+      <td>88121.5125</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="enzoampil/fastquant-blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/fastquant-blog/backtest/grid%20search/multi-strat/2020/05/10/backtest_multi_strategy.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/fastquant-blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/fastquant-blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Backtest and optimize your trading strategies with only 3 lines of code!</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/fastquant-blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
