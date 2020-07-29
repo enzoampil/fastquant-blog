@@ -3,36 +3,36 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Backtesting with grid search on Jollibee Food Corp. (JFC) | fastquant</title>
+<title>Backtest with grid search using only 3 lines of code | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Backtesting with grid search on Jollibee Food Corp. (JFC)" />
+<meta property="og:title" content="Backtest with grid search using only 3 lines of code" />
 <meta name="author" content="Jerome de Leon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Easily backtest a grid of parameters in a given trading strategy" />
-<meta property="og:description" content="Easily backtest a grid of parameters in a given trading strategy" />
+<meta name="description" content="Use fastquant to easily backtest a grid of parameters in a given trading strategy" />
+<meta property="og:description" content="Use fastquant to easily backtest a grid of parameters in a given trading strategy" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html" />
 <meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"dateModified":"2020-04-20T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Easily backtest a grid of parameters in a given trading strategy","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html","headline":"Backtesting with grid search on Jollibee Food Corp. (JFC)","datePublished":"2020-04-20T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"dateModified":"2020-04-20T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Use fastquant to easily backtest a grid of parameters in a given trading strategy","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html","headline":"Backtest with grid search using only 3 lines of code","datePublished":"2020-04-20T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Backtesting with grid search on Jollibee Food Corp. (JFC) | fastquant</title>
+<title>Backtest with grid search using only 3 lines of code | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Backtesting with grid search on Jollibee Food Corp. (JFC)" />
+<meta property="og:title" content="Backtest with grid search using only 3 lines of code" />
 <meta name="author" content="Jerome de Leon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Easily backtest a grid of parameters in a given trading strategy" />
-<meta property="og:description" content="Easily backtest a grid of parameters in a given trading strategy" />
+<meta name="description" content="Use fastquant to easily backtest a grid of parameters in a given trading strategy" />
+<meta property="og:description" content="Use fastquant to easily backtest a grid of parameters in a given trading strategy" />
 <link rel="canonical" href="https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html" />
 <meta property="og:url" content="https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html" />
 <meta property="og:site_name" content="fastquant" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-04-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"dateModified":"2020-04-20T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Easily backtest a grid of parameters in a given trading strategy","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html","headline":"Backtesting with grid search on Jollibee Food Corp. (JFC)","datePublished":"2020-04-20T00:00:00-05:00","@context":"https://schema.org"}</script>
+{"dateModified":"2020-04-20T00:00:00-05:00","author":{"@type":"Person","name":"Jerome de Leon"},"description":"Use fastquant to easily backtest a grid of parameters in a given trading strategy","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html"},"@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/grid%20search/backtest/2020/04/20/backtest_with_grid_search.html","headline":"Backtest with grid search using only 3 lines of code","datePublished":"2020-04-20T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -103,7 +103,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Backtesting with grid search on Jollibee Food Corp. (JFC)</h1><p class="page-description">Easily backtest a grid of parameters in a given trading strategy</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-20T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Backtest with grid search using only 3 lines of code</h1><p class="page-description">Use fastquant to easily backtest a grid of parameters in a given trading strategy</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-20T00:00:00-05:00" itemprop="datePublished">
         Apr 20, 2020
       </time>• 
           <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -383,10 +383,10 @@ Optimal metrics: {'rtot': -0.37480465562458976, 'ravg': -0.0006645472617457265, 
 
 
 
-<div id="39d509ba-f94b-41fc-b0e3-4bd7ee630795"></div>
+<div id="755347b0-6ff8-4031-b1fd-373aea506b11"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#39d509ba-f94b-41fc-b0e3-4bd7ee630795');
+var element = $('#755347b0-6ff8-4031-b1fd-373aea506b11');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -1510,10 +1510,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="d7b33fcc-d7d5-4683-a3ae-35240dfafcba"></div>
+<div id="502bce0f-ab8c-4910-a1e4-8bab045ba26b"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d7b33fcc-d7d5-4683-a3ae-35240dfafcba');
+var element = $('#502bce0f-ab8c-4910-a1e4-8bab045ba26b');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -2502,10 +2502,10 @@ Optimal metrics: {'rtot': 0.06805130501900258, 'ravg': 0.00012065834223227409, '
 
 
 
-<div id="b397c160-07a6-43d2-b38f-a882ef2fba68"></div>
+<div id="eb5c3f68-0414-4d50-aa36-221d081129c4"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#b397c160-07a6-43d2-b38f-a882ef2fba68');
+var element = $('#eb5c3f68-0414-4d50-aa36-221d081129c4');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
@@ -3642,10 +3642,10 @@ if (IPython.notebook.kernel != null) {
 
 
 
-<div id="32ed6c3d-6cf6-4f0c-9ef0-dfc48ed5c9ba"></div>
+<div id="66cf51ef-a367-4aee-9345-f2e3ba71b453"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#32ed6c3d-6cf6-4f0c-9ef0-dfc48ed5c9ba');
+var element = $('#66cf51ef-a367-4aee-9345-f2e3ba71b453');
 /* Put everything inside the global mpl namespace */
 window.mpl = {};
 
