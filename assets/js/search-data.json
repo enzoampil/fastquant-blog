@@ -106,6 +106,22 @@
   
 
   
+      ,"page3": {
+          "title": "On Medium",
+          "content": "Find fastquant on Medium and other platforms! . Access Philippine Stock Data with Only 2 Lines of Python | Backtest Your Trading Strategy with Only 3 Lines of Python |",
+          "url": "https://enzoampil.github.io/fastquant-blog/medium/",
+          "relUrl": "/medium/",
+          "date": ""
+      }
+      
+  
+
+  
+  
+
+  
+
+  
   
 
   
@@ -114,18 +130,13 @@
   
 
   
-
-  
   
 
   
   
 
   
-  
-
-  
-      ,"page10": {
+      ,"page11": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://enzoampil.github.io/fastquant-blog/robots.txt",
