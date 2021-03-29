@@ -2,7 +2,8 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary" /><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code | fastquant</title>
 <meta name="generator" content="Jekyll v4.0.0" />
 <meta property="og:title" content="Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code" />
@@ -17,7 +18,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-06-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Benjamin Cabalona, Jerome de Leon"},"description":"Use fastquant to maximize the returns of your stock portfolio given its overall risk profile","@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html","headline":"Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code","dateModified":"2020-06-20T00:00:00-05:00","datePublished":"2020-06-20T00:00:00-05:00","image":"https://enzoampil.github.io/fastquant-blog/images/markowitz_lesson4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Benjamin Cabalona, Jerome de Leon"},"description":"Use fastquant to maximize the returns of your stock portfolio given its overall risk profile","dateModified":"2020-06-20T00:00:00-05:00","datePublished":"2020-06-20T00:00:00-05:00","headline":"Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html"},"image":"https://enzoampil.github.io/fastquant-blog/images/markowitz_lesson4.png","url":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/fastquant-blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://enzoampil.github.io/fastquant-blog/feed.xml" title="fastquant" /><link rel="shortcut icon" type="image/x-icon" href="/fastquant-blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code | fastquant</title>
@@ -34,7 +35,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-06-20T00:00:00-05:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Benjamin Cabalona, Jerome de Leon"},"description":"Use fastquant to maximize the returns of your stock portfolio given its overall risk profile","@type":"BlogPosting","url":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html","headline":"Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code","dateModified":"2020-06-20T00:00:00-05:00","datePublished":"2020-06-20T00:00:00-05:00","image":"https://enzoampil.github.io/fastquant-blog/images/markowitz_lesson4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Benjamin Cabalona, Jerome de Leon"},"description":"Use fastquant to maximize the returns of your stock portfolio given its overall risk profile","dateModified":"2020-06-20T00:00:00-05:00","datePublished":"2020-06-20T00:00:00-05:00","headline":"Lesson 4: Implement Markowitz Portfolio Optimization in Only 3 Lines of Code","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html"},"image":"https://enzoampil.github.io/fastquant-blog/images/markowitz_lesson4.png","url":"https://enzoampil.github.io/fastquant-blog/portfolio/optimization/2020/06/20/basic_portfolio.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -85,7 +86,8 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
-</head><body><header class="site-header">
+</head>
+<body><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/fastquant-blog/">fastquant</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
